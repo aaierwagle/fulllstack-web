@@ -1,0 +1,11 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://brewhaven.vercel.app/sitemap.xml
+
+# Disallow admin routes
+Disallow: /admin/
+Disallow: /api/
+
