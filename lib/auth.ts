@@ -15,8 +15,10 @@ import { connectToDatabase } from "@/lib/db"
 
 // Environment variables
 const JWT_SECRET = process.env.JWT_SECRET
+console.log(JWT_SECRET)
 
 if (!JWT_SECRET) {
+  console.log("jwt secret key is not found // this is from auth.js page")
   throw new Error("JWT_SECRET environment variable is not defined")
 }
 
@@ -96,12 +98,15 @@ export async function getCurrentUser() {
 export async function getUser() {
   try {
     const token = cookies().get("token")?.value
+    console.log(token , "from get user function")
 
     if (!token) {
       return null
     }
 
     const payload = await verifyToken(token)
+    console.log(payload , "from get varify token function")
+
     if (!payload || !payload.id) {
       return null
     }
@@ -120,8 +125,11 @@ export async function getUser() {
 // Check if the user is authenticated
 export async function requireAuth(requiredRole?: "admin" | "staff") {
   const user = await getCurrentUser()
+  console.log(user , "from get current user function")
+
 
   if (!user) {
+     console.log("redirect couse usern not found")
     redirect("/admin/login")
   }
 
