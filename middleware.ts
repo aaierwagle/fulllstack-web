@@ -14,9 +14,11 @@ export async function middleware(request: NextRequest) {
   // Only protect admin routes that aren't public
   if (path.startsWith("/admin") && !isPublicPath) {
     const token = request.cookies.get("token")?.value
+    console.log(token,"token from middleware")
 
     if (!token) {
       const url = new URL("/admin/login", request.url)
+      console.log("no token foud in middleware")
       return NextResponse.redirect(url)
     }
   }
